@@ -1,0 +1,23 @@
+#cloud-config
+
+hostname: coreos1
+
+coreos:
+  etcd:
+    discovery: https://discovery.etcd.io/ef56f81745afd4c292eed514b5bef772
+    addr: 192.168.10.28:4001
+    peer-addr: 192.168.10.28:7001
+  units:
+    - name: etcd.service
+      command: start
+    - name: fleet.service
+      command: start
+        
+users:
+  - name: core
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAvU4XTu8PVsHeaiXvg9BHNP/FO8JikGuVPkiHPCKbRFMp7w8CoLIKZDK8qV1MVr9p34Zwgh8oiyfJkTJAUaSKTENZMJqabLkiFpJV99rQjpDwbZk0dX6vMrL3gRPUwpv/f7XtlyBKSmPkjR7FKahES57gIGsep+1NxIARmV5ist0= root@yum.huzichun.com
+  - groups:
+      - sudo
+      - docker
+
